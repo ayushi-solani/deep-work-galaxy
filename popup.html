@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <link rel="stylesheet" href="popup.css" />
+</head>
 <body>
-  <h3>Deep Work</h3>
-  <button id="btn">Get Current Tab</button>
+  <div class="container">
+    <h2>Contextual Deep Work</h2>
 
-  <p id="title"></p>
-  <p id="url"></p>
+    <label for="task">What are you working on?</label>
+    <input type="text" id="task" placeholder="e.g. Java, DSA, UI/UX" />
+
+    <button id="saveBtn">Save Task</button>
+
+    <p id="currentTask"></p>
+    <p id="tabInfo"></p>
+    <p id="focusStatus"></p>
+
+
+  </div>
 
   <script src="popup.js"></script>
 </body>
 </html>
-
