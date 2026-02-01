@@ -2,8 +2,17 @@
   "manifest_version": 3,
   "name": "Contextual Deep Work",
   "version": "1.0",
-  "permissions": ["tabs"],
+  "description": "Helps you stay focused by detecting distracting tabs.",
+  "permissions": ["tabs", "storage"],
   "action": {
     "default_popup": "popup.html"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
 }
+
+

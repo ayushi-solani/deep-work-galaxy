@@ -50,3 +50,16 @@ button:hover {
   font-size: 16px;
   color: #000000;
 }
+
+ul {
+  padding-left: 15px;
+}
+
+li {
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+li button {
+  cursor: pointer;
+}

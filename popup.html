@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8" />
   <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
@@ -10,11 +11,16 @@
     <label for="task">What are you working on?</label>
     <input type="text" id="task" placeholder="e.g. Java, DSA, UI/UX" />
 
-    <button id="saveBtn">Save Task</button>
+    <button id="saveBtn" type="button">Save Task</button>
 
     <p id="currentTask"></p>
     <p id="tabInfo"></p>
     <p id="focusStatus"></p>
+
+    <button id="saveLaterBtn" type="button">Save current tab for later</button>
+
+    <h3>Saved for Later</h3>
+    <ul id="savedList"></ul>
 
 
   </div>
