@@ -26,7 +26,6 @@ chrome.storage.sync.get("currentTask", (data) => {
 /* CHECK CURRENT TAB */
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   const tab = tabs[0];
-  tabInfo.innerText = "Current tab: " + tab.title;
 
   chrome.storage.sync.get("currentTask", (data) => {
     if (!data.currentTask) return;
@@ -39,11 +38,12 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       focusStatus.innerText = "Looks relevant to your task";
       focusStatus.style.color = "green";
     } else {
-      focusStatus.innerText = " This may distract you";
+      focusStatus.innerText = "This may distract you";
       focusStatus.style.color = "red";
     }
   });
 });
+
 
 /* SAVE FOR LATER */
 saveLaterBtn.addEventListener("click", () => {
