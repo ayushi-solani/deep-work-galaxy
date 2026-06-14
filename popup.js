@@ -13,7 +13,7 @@ const insightsPanel = document.getElementById("insightsPanel");
 const saveLaterBtn = document.getElementById("saveLaterBtn");
 const savedList = document.getElementById("savedList");
 
-const BACKEND = "http://localhost:3000";
+const BACKEND = "https://deep-work-galaxy-production.up.railway.app";
 let chatHistory = [];
 let currentTask = "";
 
