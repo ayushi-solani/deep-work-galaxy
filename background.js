@@ -1,24 +1,20 @@
-/* =====================
-   DEEP WORK GALAXY
-   Background Service Worker
-===================== */
+/* DEEP WORK GALAXY
+   Background Service Worker*/
 
-const DISTRACTION_THRESHOLD = 3; // auto-suggest break after 3 consecutive distracting tabs
+const DISTRACTION_THRESHOLD = 3; 
 
-/* =====================
-   INIT STATE
-===================== */
+/* INIT STATE */
 function getDefaultState() {
   return {
     timerActive: false,
     timerEnd: null,        // timestamp when break ends
     timerDuration: 5,      // in minutes
     distractionStreak: 0,  // consecutive distracting tabs
-    breakSuggested: false  // so we don't spam the suggestion
+    breakSuggested: false  
   };
 }
 
-// On install/startup, initialize state if not already set
+ 
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.local.get("timerState", (data) => {
     if (!data.timerState) {
@@ -27,10 +23,8 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 });
 
-/* =====================
-   LISTEN FOR MESSAGES
-   From popup.js
-===================== */
+/* LISTEN FOR MESSAGES
+   From popup.js */
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
   // Start break timer
@@ -76,9 +70,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-/* =====================
-   SCHEDULE ALARM
-===================== */
+/* SCHEDULE ALARM */
 function scheduleAlarm(durationMinutes) {
   chrome.alarms.clear("breakEnd", () => {
     chrome.alarms.create("breakEnd", {
@@ -87,12 +79,10 @@ function scheduleAlarm(durationMinutes) {
   });
 }
 
-/* =====================
-   ALARM FIRES — BREAK ENDED
-===================== */
+/*  ALARM FIRES — BREAK ENDED*/
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === "breakEnd") {
-    // Reset timer state
+    
     chrome.storage.local.get("timerState", (data) => {
       const state = data.timerState || getDefaultState();
       state.timerActive = false;
@@ -100,7 +90,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
       chrome.storage.local.set({ timerState: state });
     });
 
-    // Fire Chrome notification
+    
     chrome.notifications.create("breakDone", {
       type: "basic",
       iconUrl: "icon.png",
@@ -109,17 +99,13 @@ chrome.alarms.onAlarm.addListener((alarm) => {
       priority: 2
     });
 
-    // Tell content script to show welcome back banner
-    // Tell content script to show welcome back banner
-// Signal break ended via storage — content.js watches this
+   
 chrome.storage.local.set({ breakEnded: Date.now() });
   }
 });
 
-/* =====================
-   AUTO-SUGGEST BREAK
-   Track distraction streak via storage changes
-===================== */
+/* AUTO-SUGGEST BREAK
+   Track distraction streak via storage changes */
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area !== "sync" || !changes.aiResult) return;
 
@@ -129,7 +115,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
   chrome.storage.local.get("timerState", (data) => {
     const state = data.timerState || getDefaultState();
 
-    // Don't track if break is already active
+    
     if (state.timerActive) return;
 
     if (aiResult.isDistracting === true) {
@@ -139,7 +125,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
       state.breakSuggested = false;
     }
 
-    // Auto-suggest after hitting threshold
+    
     if (state.distractionStreak >= DISTRACTION_THRESHOLD && !state.breakSuggested) {
       state.breakSuggested = true;
 
