@@ -25,14 +25,14 @@ function showBanner(task, reason, isDistracting) {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    zIndex: "2147483647",       // max z-index so nothing covers it
+    zIndex: "2147483647",       
     fontSize: "14px",
     boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
     fontFamily: "sans-serif",
     boxSizing: "border-box"
   });
 
-  // Banner message — use AI reason if available, fallback to generic
+  
   const text = document.createElement("span");
   text.innerText = reason
     ? `⚠️ ${reason}`
