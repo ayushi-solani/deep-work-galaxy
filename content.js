@@ -1,8 +1,6 @@
-console.log("✅ Content script loaded");
+console.log(" Content script loaded");
 
-/* =====================
-   RENDER BANNER
-===================== */
+/* RENDER BANNER */
 function showBanner(task, reason, isDistracting) {
   
   const existing = document.getElementById("deep-work-banner");
@@ -52,9 +50,7 @@ function showBanner(task, reason, isDistracting) {
   console.log("🚀 Banner injected:", reason);
 }
 
-/* =====================
-   CHECK STORAGE & DECIDE
-===================== */
+/*CHECK STORAGE & DECIDE*/
 function evaluatePage() {
   chrome.storage.sync.get(["currentTask", "aiResult"], (data) => {
     if (!data.currentTask) return;
@@ -74,19 +70,15 @@ function evaluatePage() {
   });
 }
 
-/* =====================
-   LISTEN FOR UPDATES
-   Re-evaluate if task or AI result changes
-===================== */
+/* LISTEN FOR UPDATES
+   Re-evaluate if task or AI result changes */
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area === "sync" && (changes.aiResult || changes.currentTask)) {
     evaluatePage();
   }
 });
 
-/* =====================
-   INITIAL RUN
-===================== */
+/* INITIAL RUN */
 
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", evaluatePage);
@@ -94,9 +86,7 @@ if (document.readyState === "loading") {
   evaluatePage();
 }
 
-/* =======================
-   BREAK ENDED BANNER
-======================= */
+/* BREAK ENDED BANNER */
 
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area === "local" && changes.breakEnded) {
