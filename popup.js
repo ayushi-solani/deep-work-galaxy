@@ -17,9 +17,7 @@ const BACKEND = "http://localhost:3000";
 let chatHistory = [];
 let currentTask = "";
 
-/* =======================
-   TABS
-======================= */
+/* TABS */
 document.querySelectorAll(".tab").forEach(tab => {
   tab.addEventListener("click", () => {
     document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
@@ -29,9 +27,7 @@ document.querySelectorAll(".tab").forEach(tab => {
   });
 });
 
-/* =======================
-   STATUS HELPERS
-======================= */
+/* STATUS HELPERS */
 function setStatus(type, message) {
   focusStatus.className = type;
   focusStatus.innerText = message;
@@ -47,12 +43,10 @@ function setStatus(type, message) {
   } else if (type === "loading") {
     statusDot.classList.add("grey");
   }
-  // default = red/distracting, no extra class needed
+  
 }
 
-/* =======================
-   SAVE TASK
-======================= */
+/* SAVE TASK */
 saveBtn.addEventListener("click", () => {
   const value = input.value.trim();
   if (!value) return;
@@ -64,9 +58,7 @@ saveBtn.addEventListener("click", () => {
   });
 });
 
-/* =======================
-   LOAD TASK ON OPEN
-======================= */
+/* LOAD TASK ON OPEN*/
 chrome.storage.sync.get("currentTask", (data) => {
   if (data && data.currentTask) {
     // Don't autofill the input — just show it as the active task below
