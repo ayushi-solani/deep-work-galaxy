@@ -2,29 +2,94 @@
 <html>
 <head>
   <meta charset="UTF-8" />
+  <title>Deep Work Galaxy</title>
   <link rel="stylesheet" href="popup.css" />
 </head>
+
 <body>
-  <div class="container">
-    <h2>Contextual Deep Work</h2>
+  <div class="popup-header">
+    <div class="popup-title"> Deep Work Galaxy</div>
+    <div class="popup-subtitle">AI-powered focus assistant</div>
+  </div>
 
-    <label for="task">What are you working on?</label>
-    <input type="text" id="task" placeholder="e.g. Java, DSA, UI/UX" />
+  <div class="popup-body">
 
-    <button id="saveBtn" type="button">Save Task</button>
+    <!-- Task Card -->
+    <div class="card">
+      <div class="card-label">Current Task</div>
+      <input type="text" id="task" placeholder="e.g. Java, DSA, UI/UX" />
+      <p id="currentTask" class="info-text"></p>
+      <button id="saveBtn" type="button">🚀 Save Task</button>
+    </div>
 
-    <p id="currentTask"></p>
-    <p id="tabInfo"></p>
-    <p id="focusStatus"></p>
+    <!-- Status Card -->
+    <div class="status-card" id="statusCard">
+      <div class="status-dot" id="statusDot"></div>
+      <div class="status-text">
+        <p id="tabInfo" class="tab-info"></p>
+        <p id="focusStatus"></p>
+      </div>
+    </div>
 
-    <button id="saveLaterBtn" type="button">Save current tab for later</button>
+    <!-- Break Timer Card -->
+<div class="card timer-card">
+  <div class="card-label">☕ Break Timer</div>
 
-    <h3>Saved for Later</h3>
-    <ul id="savedList"></ul>
+  <div class="timer-display" id="timerDisplay">No active break</div>
 
+  <div class="timer-slider-row" id="timerControls">
+    <span class="slider-label">1 min</span>
+    <input type="range" id="breakSlider" min="1" max="10" value="5" step="1" />
+    <span class="slider-label">10 min</span>
+  </div>
+
+  <div class="timer-duration-label">
+    Break: <span id="sliderValue">5</span> min
+  </div>
+
+  <div class="timer-btn-row">
+    <button id="startBreakBtn" type="button" class="btn-break-start">☕ Start Break</button>
+    <button id="stopBreakBtn" type="button" class="btn-break-stop hidden">✖ Stop Break</button>
+  </div>
+
+  <div class="break-suggest" id="breakSuggest">
+    😴 You seem distracted — take a break?
+  </div>
+</div>
+
+    <!-- Tabbed Card -->
+    <div class="card tab-card">
+      <div class="tab-row">
+        <button class="tab active" data-tab="chat">🤖 Chat</button>
+        <button class="tab" data-tab="insights">📊 Insights</button>
+        <button class="tab" data-tab="saved">⭐ Saved</button>
+      </div>
+
+      <!-- Chat Panel -->
+      <div class="tab-panel" id="panel-chat">
+        <div id="chatMessages"></div>
+        <div class="chat-input-row">
+          <input type="text" id="chatInput" placeholder="Ask your focus coach..." />
+          <button id="chatSendBtn" type="button">Send</button>
+        </div>
+      </div>
+
+      <!-- Insights Panel -->
+      <div class="tab-panel hidden" id="panel-insights">
+        <button id="insightsBtn" type="button" class="btn-insights">📊 Analyze My Focus</button>
+        <div id="insightsPanel"></div>
+      </div>
+
+      <!-- Saved Panel -->
+      <div class="tab-panel hidden" id="panel-saved">
+        <button id="saveLaterBtn" type="button" class="btn-later">⭐ Save Current Tab</button>
+        <ul id="savedList"></ul>
+      </div>
+    </div>
 
   </div>
 
   <script src="popup.js"></script>
 </body>
 </html>
+
